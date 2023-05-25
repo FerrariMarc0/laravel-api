@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PortfolioController extends Controller
 {
     public function index(){
-        $projects = Portfolio::all();
+        $projects = Portfolio::with('technologies', 'type')->get();
 
         return response()->json([
             'success' => true,
