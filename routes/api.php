@@ -20,4 +20,4 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 Route::get('projects', [PortfolioController::class, 'index']);
-Route::get('projects/{slug}', [PortfolioController::class, 'show']);
+Route::get('projects/{id}', [PortfolioController::class, 'show']);

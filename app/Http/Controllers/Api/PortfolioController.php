@@ -11,8 +11,8 @@ class PortfolioController extends Controller
     public function index()
     {
         /* $projects = Portfolio::all(); */
-        $projects = Portfolio::with('technologies', 'type')->get();
-        /* $projects = Portfolio::with('technologies', 'type')->paginate(3); */
+        /* $projects = Portfolio::with('technologies', 'type')->get(); */
+        $projects = Portfolio::with('technologies', 'type')->paginate(6);
 
         return response()->json([
             'success' => true,
@@ -20,9 +20,11 @@ class PortfolioController extends Controller
         ]);
     }
 
-    public function show(string $slug)
+    public function show(/* string $slug */ int $id )
     {
-        $project = Portfolio::where('slug', $slug)->with('technologies', 'type')->first();
+        /* $project = Portfolio::where('slug', $slug)->with('technologies', 'type')->first(); */
+        /* $project = Portfolio::where('id', $id)->with('technologies', 'type')->first(); */
+        $project = Portfolio::find($id)->with('technologies', 'type')->first();
 
         if ($project) {
 
