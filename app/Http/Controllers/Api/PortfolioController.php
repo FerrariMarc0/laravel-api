@@ -20,25 +20,33 @@ class PortfolioController extends Controller
         ]);
     }
 
-    public function show(/* string $slug */ int $id )
+    public function show(string $slug /* int $id */ )
     {
         /* $project = Portfolio::where('slug', $slug)->with('technologies', 'type')->first(); */
         /* $project = Portfolio::where('id', $id)->with('technologies', 'type')->first(); */
-        $project = Portfolio::find($id)->with('technologies', 'type')->first();
+        try {
+            $project = Portfolio::where('slug', $slug)->with('technologies', 'type')->first();
 
-        if ($project) {
+                if ($project) {
 
-            return response()->json([
-                'success' => true,
-                'results' => $project
-            ]);
+                    return response()->json([
+                        'success' => true,
+                        'results' => $project
+                    ]);
 
-        } else {
+                } else {
 
-            return response()->json([
-                'success' => false,
-                'results' => null
-            ], 404);
-        }
+                    return response()->json([
+                        'success' => false,
+                        'results' => null
+                    ], 404);
+                }
+            } catch (\Throwable $th) {
+
+                return response()->json([
+                    'success' => false,
+                    'results' => null
+                ], 500);
+            }
     }
 }
