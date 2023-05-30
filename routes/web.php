@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashBoardController;
+use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\TypeController;
 
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::get('dashboard', [DashBoardController::class, 'index'])->name('dashboard');
     Route::resource('portfolios', PortfolioController::class)->parameters(['portfolios'=>'portfolio:slug']);
     Route::resource('types', TypeController::class)->parameters(['types'=>'type:slug']);
+    Route::delete('leads/{lead}', [LeadController::class, 'destroy'])->name('leads.destroy');
 });
 
 require __DIR__.'/auth.php';
